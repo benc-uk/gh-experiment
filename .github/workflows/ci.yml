@@ -35,7 +35,7 @@ jobs:
           echo "$DUMP"
         
       - name: Open New GitHub Issue
-        if: github.ref == 'refs/heads/main'
+        if: github.ref == 'refs/heads/main' && github.event.head_commit.committer.name != 'GitHub'
         uses: dacbd/create-issue-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
