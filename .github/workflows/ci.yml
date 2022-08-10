@@ -39,7 +39,7 @@ jobs:
         uses: dacbd/create-issue-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          title: Direct push to main happened!
+          title: "Direct push to main: ${{ github.actor }}"
           body: |
             Whoops! Looks like **${{ github.actor }}** pushed directly to the main branch! 💀
             I'm sure this was just a innocent mistake 🙃
