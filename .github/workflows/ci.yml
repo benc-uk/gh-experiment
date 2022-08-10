@@ -41,9 +41,8 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: Direct push to main happened!
           body: |
-            💥 Whoops! Looks like **${{ github.actor }}** pushed directly to the main branch! 💀
+            Whoops! Looks like **${{ github.actor }}** pushed directly to the main branch! 💀
             I'm sure this was just a innocent mistake 🙃
-            - SHA: ${{ github.event.head_commit.id }}
-            - Message ${{ github.event.head_commit.message }}
+            - Message: ${{ github.event.head_commit.message }}
             - URL: ${{ github.event.head_commit.url }}
           labels: whoops
