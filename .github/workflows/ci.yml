@@ -10,7 +10,7 @@ on:
 
 permissions:
   contents: read
-  issues: read
+  issues: write
   
 jobs:
   ci-build:
@@ -20,7 +20,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - run: |
-          echo "THIS WAS A ${GITHUB_EVENT_NAME} EVENT"
+          echo "THIS WAS A ${GITHUB_EVENT_NAME} EVENT BY ${GITHUB_ACTOR} FROM REF ${GITHUB_REF}"
 
       - name: Open New GitHub Issue
         uses: fullStackMiller/open-issue@v1.0.1
