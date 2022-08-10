@@ -28,4 +28,4 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: Push direct to main!
-          body: 💥 Whoopsie! Looks like ${{ env.GITHUB_ACTOR }} pushed directly to the main branch! 😲
+          body: Whoopsie! Looks like ${{ env.GITHUB_ACTOR }} pushed directly to the main branch!
