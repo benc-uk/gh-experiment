@@ -28,11 +28,11 @@ jobs:
           echo "--------------"
           echo "committer.name: ${{ github.event.committer.name }}"
 
-      - name: Dump GitHub context
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
-        run: |
-          echo "$GITHUB_CONTEXT"
+      # - name: Dump GitHub context
+      #   env:
+      #     GITHUB_CONTEXT: ${{ toJson(github) }}
+      #   run: |
+      #     echo "$GITHUB_CONTEXT"
         
       - name: Open New GitHub Issue
         if: github.ref == 'refs/heads/main'
