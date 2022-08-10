@@ -20,7 +20,11 @@ jobs:
       - uses: actions/checkout@v3
 
       - run: |
-          echo "THIS WAS A ${GITHUB_EVENT_NAME} EVENT BY ${GITHUB_ACTOR} FROM REF ${GITHUB_REF}"
+          echo "github.triggering_actor ${{ github.triggering_actor }}
+          echo "github.ref_name ${{ github.ref_name }}
+          echo "github.ref ${{ github.ref }}
+          echo "github.head_ref ${{ github.head_ref }}
+          echo "github.base_ref ${{ github.base_ref }}
 
       - name: Open New GitHub Issue
         if: github.ref == 'refs/heads/main'
