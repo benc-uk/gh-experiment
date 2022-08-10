@@ -33,16 +33,23 @@ jobs:
           DUMP: ${{ toJson(github.event) }}
         run: |
           echo "$DUMP"
-        
-      - name: Create issue for direct push
+
+      - name: Bad
         if: github.ref == 'refs/heads/main' && github.event.head_commit.committer.name != 'GitHub'
-        uses: dacbd/create-issue-action@main
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          title: "Direct push to main: ${{ github.actor }}"
-          body: |
-            Whoops! Looks like **${{ github.actor }}** pushed directly to the main branch! 💀
-            I'm sure this was just a innocent mistake 🙃
-            - Message: ${{ github.event.head_commit.message }}
-            - URL: ${{ github.event.head_commit.url }}
-          labels: whoops
+        run: |
+          gh issue create --title 'Direct push to main: ${{ github.actor }}' \
+          --body 'Whoops! Looks like **${{ github.actor }}** pushed directly to the main branch! 💀' \
+          --label 'whoops'
+
+      # - name: Create issue for direct push
+      #   if: github.ref == 'refs/heads/main' && github.event.head_commit.committer.name != 'GitHub'
+      #   uses: dacbd/create-issue-action@main
+      #   with:
+      #     token: ${{ secrets.GITHUB_TOKEN }}
+      #     title: "Direct push to main: ${{ github.actor }}"
+      #     body: |
+      #       Whoops! Looks like **${{ github.actor }}** pushed directly to the main branch! 💀
+      #       I'm sure this was just a innocent mistake 🙃
+      #       - Message: ${{ github.event.head_commit.message }}
+      #       - URL: ${{ github.event.head_commit.url }}
+      #     labels: whoops
