@@ -23,7 +23,7 @@ jobs:
           echo "THIS WAS A ${GITHUB_EVENT_NAME} EVENT BY ${GITHUB_ACTOR} FROM REF ${GITHUB_REF}"
 
       - name: Open New GitHub Issue
-        if: ${{ github.ref == "refs/heads/main" }}
+        if: github.ref == 'refs/heads/main'
         uses: fullStackMiller/open-issue@v1.0.1
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
