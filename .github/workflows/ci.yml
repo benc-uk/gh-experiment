@@ -26,8 +26,13 @@ jobs:
           echo "github.head_ref ${{ github.head_ref }}"
           echo "github.base_ref ${{ github.base_ref }}"
           echo "--------------"
-          echo " ${{ toJSON(github.event) }}"
 
+      - name: Dump GitHub context
+        env:
+          GITHUB_CONTEXT: ${{ toJson(github) }}
+        run: |
+          echo "$GITHUB_CONTEXT"
+        
       - name: Open New GitHub Issue
         if: github.ref == 'refs/heads/main'
         uses: dacbd/create-issue-action@main
