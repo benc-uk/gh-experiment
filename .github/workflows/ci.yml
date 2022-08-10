@@ -19,42 +19,15 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
-      - run: |
-          echo "github.triggering_actor ${{ github.triggering_actor }}"
-          echo "github.ref_name ${{ github.ref_name }}"
-          echo "github.ref ${{ github.ref }}"
-          echo "github.head_ref ${{ github.head_ref }}"
-          echo "github.base_ref ${{ github.base_ref }}"
-          echo "--------------"
-          echo "committer.name: ${{ github.event.head_commit.committer.name }}"
-
-      - name: Dump GitHub context
-        env:
-          DUMP: ${{ toJson(github.event) }}
-        run: |
-          echo "$DUMP"
-
-      - name: Bad
+      - name: Create issue for direct push
         if: github.ref == 'refs/heads/main' && github.event.head_commit.committer.name != 'GitHub'
-        env:
-            GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}        
-        run: |
-          gh issue create --title 'Direct push to main: ${{ github.actor }}' \
-          --body 'Whoops! Looks like **${{ github.actor }}** pushed directly to the main branch! 💀
-          I'm sure this was just a innocent mistake 🙃 \
-          - Message: ${{ github.event.head_commit.message }} \
-          - URL: ${{ github.event.head_commit.url }}' \
-          --label 'whoops'
-
-      # - name: Create issue for direct push
-      #   if: github.ref == 'refs/heads/main' && github.event.head_commit.committer.name != 'GitHub'
-      #   uses: dacbd/create-issue-action@main
-      #   with:
-      #     token: ${{ secrets.GITHUB_TOKEN }}
-      #     title: "Direct push to main: ${{ github.actor }}"
-      #     body: |
-      #       Whoops! Looks like **${{ github.actor }}** pushed directly to the main branch! 💀
-      #       I'm sure this was just a innocent mistake 🙃
-      #       - Message: ${{ github.event.head_commit.message }}
-      #       - URL: ${{ github.event.head_commit.url }}
-      #     labels: whoops
+        uses: dacbd/create-issue-action@main
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          title: "Direct push to main: ${{ github.actor }}"
+          body: |
+            Whoops! Looks like **${{ github.actor }}** pushed directly to the main branch! 💀
+            I'm sure this was just a innocent mistake 🙃
+            - Message: ${{ github.event.head_commit.message }}
+            - URL: ${{ github.event.head_commit.url }}
+          labels: whoops
