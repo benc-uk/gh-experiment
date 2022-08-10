@@ -24,8 +24,9 @@ jobs:
 
       - name: Open New GitHub Issue
         if: github.ref == 'refs/heads/main'
-        uses: fullStackMiller/open-issue@v1.0.1
+        uses: dacbd/create-issue-action@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           title: Push direct to main!
-          body: Whoopsie! Looks like ${{ github.actor }} pushed directly to the main branch!
+          body: 💥 Whoops! Looks like ${{ github.actor }} pushed directly to the main branch! I'm sure this was just a mistake 🙃
+          labels: whoops
